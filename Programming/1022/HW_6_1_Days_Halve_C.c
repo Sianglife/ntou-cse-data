@@ -18,6 +18,7 @@ int daysHalve(double length) {
     times++; 
     return daysHalve(length / 2);
 }
+
 int main() {
     int length;
     scanf("%d", &length);
