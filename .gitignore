@@ -1,2 +1,6 @@
 *.ini
 settings.json
+*.exe
+*.out
+tempCodeRunnerFile.*
+./build/
