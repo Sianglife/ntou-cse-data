@@ -24,43 +24,49 @@ void bubbleSort(int arr[], int n) {
     }
 }
 
-int main() {
-    // n: 輸入總數, tmp: 輸入陣列用暫存、is_first: 是否為第一個數字
-    int n, tmp, is_first=1;
-    scanf("%d", &n);
-    int positive[n], negative[n];
+void moveNegatives(int intArray[], int arraySize) {
+    // tmp: 輸入陣列用暫存、is_first: 是否為第一個數字
+    int tmp, is_first=1;
+    int positive[arraySize], negative[arraySize];
     int cnt_positive = 0, cnt_negative = 0; // 正、負數的個數計數
-
-    for(int i = 0; i < n; i++) {
-        // 輸入陣列
-        scanf("%d", &tmp);
+    for(int i = 0; i < arraySize; i++) {
+        // 轉換陣列，分為正負
+        tmp = intArray[i];
         if(tmp >= 0) {
             positive[cnt_positive++] = tmp; // 正數放進正數陣列
         } else {
             negative[cnt_negative++] = tmp; // 負數放進負數陣列
         }
     }
+    int i;
+    for(i = 0; i < cnt_positive;i++) {
+        // 重新置入正數
+        intArray[i] = positive[i];
+    }    
+    for(i = 0; i < cnt_negative;i++) {
+        // 重新置入負數
+        intArray[i+cnt_positive] = negative[i];
+    }
+}
 
+int main() {
+    int n;
+    // 讀入總數
+    scanf("%d", &n);
+    int arr[n];
+    // 輸入陣列
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }     
+    moveNegatives(arr, n); // 呼叫函式
     // 輸出
-    printf("{"); 
-    for(int i = 0; i < cnt_positive;i++) {
-        // 印正數
-        if(is_first == 0) {
-            printf(", "); // 如果不是第一個，就印前綴的空格
+    printf("{");
+    for(int i = 0; i < n; i++) {
+        if (i != 0) {
+            printf(", "); // 逗號
         }
-        printf("%d", positive[i]);
-        is_first = 0; // 輸出過改變狀態
+        printf("%d", arr[i]);
     }
-    
-    for(int i = 0; i < cnt_negative;i++) {
-        // 印負數
-        if(is_first == 0) {
-            printf(", "); // 如果不是第一個，就印前綴的空格
-        }
-        printf("%d", negative[i]);
-        is_first = 0; // 輸出過改變狀態
-    }
-    
-    printf("}\n");
+    printf("}");
     return 0;
 }
