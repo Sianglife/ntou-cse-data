@@ -1,3 +1,8 @@
+/*Date: 2025/11/7
+Author: 黃鈺翔
+Description: convert decimal number to other radix number
+Using github copilot to write comments
+*/
 #include<stdio.h>
 #include<math.h>
 
