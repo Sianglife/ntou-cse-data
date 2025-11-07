@@ -8,6 +8,7 @@ void mergeSort(int arr[], int n);
 
 // --- 輔助函式原型 ---
 void swap(int *a, int *b);
+void merge(int arr[], int L[], int R[], int size_L, int size_R);
 void print_arr(int arr[], int n);
 
 // ================================================================
@@ -42,6 +43,7 @@ int main() {
     printf(" 1. 氣泡排序 (Bubble Sort)\n");
     printf(" 2. 選擇排序 (Selection Sort)\n");
     printf(" 3. 插入排序 (Insertion Sort)\n");
+    printf(" 4. 合併排序 (Merge Sort)\n");
     printf("請輸入: ");
     scanf("%d", &mode);
 
@@ -75,6 +77,26 @@ int main() {
 void print_arr(int arr[], int n) {
     for (int i = 0; i < n; i++) printf("%d ", arr[i]);
     printf("\n");
+}
+
+void merge(int arr[], int L[], int R[], int size_L, int size_R) {
+    int lcnt = 0, rcnt = 0;
+    int cnt = 0;
+    while(lcnt < size_L && rcnt < size_R) {
+        if (L[lcnt] <= R[rcnt]) {
+            arr[cnt++] = L[lcnt++];
+        } else {
+            arr[cnt++] = R[rcnt++];
+        }
+    }
+
+    while(lcnt < size_L) {
+        arr[cnt++] = L[lcnt++];
+    }
+
+    while(rcnt < size_R) {
+        arr[cnt++] = R[rcnt++];
+    }
 }
     
 
@@ -127,22 +149,21 @@ void insertionSort(int arr[], int n) {
 }
 
 void mergeSort(int arr[], int n) {
-    // TODO
-    int L[n / 2 + 1], R[n / 2 + 1];
-    int i;
-    for(i = 0; i < n / 2; i++) {
-        // 搬前半
+    if (n <= 1) {
+        return;
+    }
+    int mid = n / 2;
+    int L[mid];
+    int R[n - mid];
+
+    for(int i = 0; i < mid; i++) {
         L[i] = arr[i];
     }
-    if (n % 2 == 1) {
-        // 奇數長度多加中間一位到前半
-        L[i] = arr[i];
-        i++;
+    for(int i = mid; i < n; i++) {
+        R[i - mid] = arr[i];
     }
-    print_arr(L, n/2+1);
-    for(; i < n; i++) {
-        // 後半
-        R[i - n / 2 - (n % 2)] = arr[i];
-    } 
-    print_arr(R, n/2+1);
+
+    mergeSort(L, mid);
+    mergeSort(R, n - mid);
+    merge(arr, L, R, mid, n - mid);
 }
