@@ -15,7 +15,7 @@ int main() {
     for(int i = 0; i < n; i++) {
         // Read
         fgets(tmp, sizeof(tmp), stdin);
-        tmp[strscpn(tmp, '\n')] = '\0'; // remove \n
+        tmp[strspn(tmp, '\n')] = '\0'; // remove \n
         
         // Update Max / Min
         len = strlen(tmp);
@@ -31,7 +31,7 @@ int main() {
     printf("最短字串: 長度%u\n", min);
     for(int i = 0; i < n; i++) {
         if (strlen(words[i]) == min) {
-            print;
+            printf("%s\n", words[i]);
         }
     }
 
