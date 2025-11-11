@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <title>海校制霸</title>
+    </head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #333333;
+            color: #f0f0f0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Segoe UI';
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .answer {
+            background-color: #5c5555;
+            color: #ffffff;
+            width: 35rem;
+            height: 3.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .murmur {
+            color: rgb(173, 173, 173);
+            text-decoration: wavy underline;
+        }
+
+        .text-section {
+            background-color: #5c5555;
+            color: #e5ebb3;
+            padding: 1rem;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+
+        #pre-art {
+            color: #2a9b26;
+            overflow: auto;
+        }
+    </style>
+    
+    <body>
+        <!-- Lab Questions START -->
+        <h1>
+            <i class="bi bi-patch-question"></i>
+            Lab Questions
+        </h1>
+        <h3>Q1: &lt;em> 跟 &lt;i> 有什麼差異</h3>
+        <textarea class="answer"><i>只代表文字顯示斜體，而<em>額外還有表示語氣強調的意思，對SEO或使用螢幕閱讀器的使用者會有功能明顯的差異。</textarea>
+
+        <h3>Q2: &lt;b> 跟 &lt;strong> 有什麼差異</h3> 
+        <textarea class="answer"><b>只代表文字顯示粗體，<strong>額外還有語意表示強調的意思，對於SEO或使用螢幕閱讀器的使用者會有功能明顯的差異。</textarea>
+        
+        <h3>Q3: 你覺得下面這種寫法算錯嗎?</h3>
+        <img src="data:image/jpeg;base64,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jeBloPlwvfQtc0Oxq7dW1e0a12eGVtgNdK1heC3Y8lnPzDOQOOAuJdVlbWbPtzE443A5wfqvFVH0ep2m0DR6mtuhuTTi9qAkhiZAJHiNoIDnGUEHOfdc9291LT9Z1mvf0213zZKsbJIzFsdE5rcYOBt/+PC5lEBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBdrpuZNA0wPt1TLHO7LRK1r2sOMZ448+q5lFphbdpZYptUDoXteBE0EtcHc+44KqURSKIiKons8A9lhzA4g5IIPBCyzhg9llZVpsIHjdwqilajEM1V57kyE4mb/AAforo9CuVd43e5Us3NNY3Sdp8YrumsyEEQD5cHgu8lnTbRhdbkMuyR0JDSTyTkKvycYzx6Ipzve2plpZutgV9PcZSZGOO8h3IG7zXtN+XrUdh1qOSJ0u4YkztH1HkqZFOF6dFLqDJICx1hrgYpOC7z3HChvq40JrPiKxe2QyFolGcYH+qqUUn+PXxe9/VjSmjo1nSPeJDIMCAHIP1cq9x3OJwBk9B5LCLcmrtjfmhERVBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBdoiLTAiIgIiIJ0P6TPYfytm+X2/lEUUHT9v5K5V/jd7n+URRYwiIiiIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIg//9k=" 
+        alt="Code">
+        <br>
+        <textarea class="answer">顯示依舊會出現「我 把 內文 寫 在 這些 地方 還是 可以讀」，但這些tag有其代表的意義，這樣寫會失去可讀性，且Undefined Tag不是HTML合法的Tag，也沒有Closing Tag，註解也應該要以<!-- -->撰寫而不是</，這樣代表的是其他的tag</textarea>
+
+        <h3>Q4: 你覺得把 &lt;head> 、 &lt;body> 去掉會怎樣嗎 ?</h3>
+        <textarea class="answer">就在瀏覽器正確顯示而言，不會有什麼影響。但這種不符合HTML標準的寫法可能會影響網站SEO效果，造成搜尋引擎無法正確解析而影響商業效益。另外在舊式的瀏覽器中也可能會無法正確顯示。</textarea>
+
+        <h3>Q5: 你覺得 html 算是一種程式語言嗎 ?</h3>
+        <textarea class="answer">不算，因為HTML沒有表達流程、邏輯運算等程式語言的基本功能，HTML主要是描述網頁的結構和內容，是一種標記語言。</textarea>
+
+        <!-- Lab Questions END -->
+
+        
+        <!-- Pre START -->
+        <h1>
+            <i class="bi bi-easel"></i>
+            PRE
+        </h1>
+        <pre id="pre-art">
+                                                            $$\               $$\                       $$$\ $$\           $$\                                                     $$\$$$\       
+                                                    $$ |              $$ |                     $$  _|$  |          $$ |                                                    $  |\$$\      
+    $$$$$$$\  $$$$$$\  $$$$$$$\   $$$$$$$\  $$$$$$\  $$ | $$$$$$\      $$ | $$$$$$\   $$$$$$\  $$  /  \_/$$$$$$$\ $$$$$$\    $$$$$$\  $$\   $$\  $$$$$$$\  $$$$$$$\  $$$$$$\\_/  \$$\ $$\ 
+    $$  _____|$$  __$$\ $$  __$$\ $$  _____|$$  __$$\ $$ |$$  __$$\     $$ |$$  __$$\ $$  __$$\ $$ |      $$  __$$\\_$$  _|  $$  __$$\ $$ |  $$ |$$  _____|$$  _____|$$  __$$\     $$ |\__|
+    $$ /      $$ /  $$ |$$ |  $$ |\$$$$$$\  $$ /  $$ |$$ |$$$$$$$$ |    $$ |$$ /  $$ |$$ /  $$ |$$ |      $$ |  $$ | $$ |    $$ /  $$ |$$ |  $$ |$$ /      \$$$$$$\  $$$$$$$$ |    $$ |    
+    $$ |      $$ |  $$ |$$ |  $$ | \____$$\ $$ |  $$ |$$ |$$   ____|    $$ |$$ |  $$ |$$ |  $$ |\$$\      $$ |  $$ | $$ |$$\ $$ |  $$ |$$ |  $$ |$$ |       \____$$\ $$   ____|   $$  |$$\ 
+    \$$$$$$$\ \$$$$$$  |$$ |  $$ |$$$$$$$  |\$$$$$$  |$$ |\$$$$$$$\ $$\ $$ |\$$$$$$  |\$$$$$$$ | \$$$\    $$ |  $$ | \$$$$  |\$$$$$$  |\$$$$$$  |\$$$$$$$\ $$$$$$$  |\$$$$$$$\  $$$  / $  |
+    \_______| \______/ \__|  \__|\_______/  \______/ \__| \_______|\__|\__| \______/  \____$$ |  \___|   \__|  \__|  \____/  \______/  \______/  \_______|\_______/  \_______| \___/  \_/ 
+                                                                                    $$\   $$ |                                                                                           
+                                                                                    \$$$$$$  |                                                                                           
+                                                                                    \______/                                                                                          
+        </pre>
+        <!-- Pre END -->
+
+        <!-- Content START -->
+        <h1>114臺師大資工、彰師大資工、海大資工個人申請面試經驗</h1>
+        <p class="description">114年面試臺師大資工系APCS組、海洋大學資工系、彰師大資工系的實戰撇步飛翔講給你聽。</p>
+
+        <h2>甄選校系</h2>
+        <ul>
+            <li>國立臺灣師範大學 資訊工程學系(APCS組)&nbsp;<strong>口試40%</strong></li>
+            <li>國立彰化師範大學 資訊工程學系&nbsp;<strong>面試10%</strong></li>
+            <li>國立臺灣海洋大學 資訊工程學系&nbsp;<strong>面試30%</strong></li>
+        </ul>
+
+        <h2>114學測級分</h2>
+        <p>國12(前) 英14(頂) 數A10(前) 數B12(頂) 自12(前) 社12(前)</p>
+
+        <!-- NTNU -->
+        <h2>國立臺灣師範大學 資訊工程學系(APCS組)</h2>
+        <p>這次在臺師大公館校區 應用科學大樓面試，進 1F 大門就是報到櫃檯，B1 有考生家長休息區。公告的面試流程裡有團體時間的場次，系主任會在 B1 的考生休息區簡介臺師大資工系的特色和課程(系主任超親切！)</p>
+        <p>輪到你的時候會有學長姐到休息室唱名，帶你到 2F 試場。試場有兩關，各 7 分鐘、兩位教授。6 分鐘會敲門一響，7 分鐘敲兩響後，自行收拾話題，待教授指示後離開。</p>
+        <p>第一關比較偏技術的題目，第二關則針對高中活動經歷和關於資工的經歷，第一關結束後直接到對面的第二關。可能是 APCS 組的關係，第一關的題目真的有夠硬，但明顯是由難入易的安排，順順的表達自己的想法就好，不要多去講自己不懂的東西，教授會追問。</p>
+        <p>而且這兩間的安排實在有點審訊室的氛圍，<strong>都是微透光的霧面玻璃。第一關很寬敞，教室內就一張椅子，一張桌子，兩位教授看著電腦，加一隻攝影機對著你。</strong></p>
+        <p>這是一種信心破壞式的問法，加上充滿壓迫感的環境下令人緊張，一定要穩住自己，這是一種壓力測試，像聊天一樣就ok。</p>
+        <p><strong>引導我的學姊會和我聊天，他有和我聊裡面教授的個性之類的，比較不會緊張。</strong></p>
+        <u class="murmur">沒想到這位學姊是我後來在7月工作的同事</u>
+
+        <h3>問題</h3>
+        <p>兩關都要先自我介紹(2-3分)，兩位教授都會問問題，第二位比較偏向審查資料相關的內容。</p>
+        <p>第一組教授比較無表情，省話：</p>    
+
+        <ul>
+            <li>1A: 馮諾伊慢架構是什麼?</li>
+            <li>1A: C的 static 和 public 能否說明一下特色</li>
+            <li>1A: 如何用 stack 實作 queue</li>
+            <li>1B: IP分享器的原理</li>
+            <li>1B: 從 public IP 到 local IP 封包怎麼知道傳去哪?</li>
+        </ul>
+
+        <p>第二組教授表情浮誇，聲音非常有活力：</p>
+        <ul>
+            <li>2A: 你在高中做了很多事嘛，那有沒有困難努力很久的?</li>
+            <li>2B: 你有沒有關於我們資工的活動經驗</li>
+        </ul>
+        
+        <!-- NCUE -->
+        <h2>國立彰化師範大學 資訊工程學系</h2>
+        <p>彰師大的大樓比較特別，大門是在 B2（應該是沿著山壁蓋，所以會有樓層差），1F 報到處會送一罐茶，會請你到 B1 一間教室休息。時間到會有人道休息室唱名，帶 5 個人到等待區準備入場。</p>
+        <p>進場後先以進場順序抽籤，接著就依抽出來的順序自我介紹（1 分鐘)，會倒數計時給你看。再來是 3 分鐘答題環節，依照抽出來的順序拿題本，裡面大概有 7 – 8 題，在 3 分鐘內要讀題+作答，一樣會倒數計時給你看。得分以內容深入為主，不是答多題就高分。</p>
+        <p>每個流程計時都是嚴格倒數，教授很親切但會抖腳，不要因此分心作答。團體面試會緊張，不要刻意去不聽別人講而鬧心慌，建足心裡建設後，大概聽別人講什麼、稍微想一下自己會怎麼說。</p>
+
+        <h3>問題(有整本 7 – 8 題，部分)</h3>
+        <ul>
+            <li>1分鐘自我介紹</li>
+            <li>2 進制是什麼？1010 是 10 進制多少？是 16 進制多少？</li>
+            <li>你學資工會拿來做什麼？</li>
+        </ul>
+
+        <!-- NTOU -->
+        <h2>國立臺灣海洋大學 資訊工程學系</h2>
+        <p>報到後有會議室可以休息，提供餅乾茶水。校舍走廊、中庭應該沒有冷氣很悶熱，休息室和教室有冷氣。進場前會特別提醒手機、智慧型裝置不要戴進去，可以放在準備區出來再取回。</p>
+
+        <h3>問題</h3>
+        <ul>
+            <li>1分鐘自我介紹</li>
+            <li>你有寫過很多專案，分享一個</li>
+            <li>念一段英文科普文章並翻譯成中文</li>
+            <li>數學向量算長度，向量相減(寫黑板)</li>
+        </ul>
+
+        <h3>有點趣味的小插曲</h3>
+        <i>*\對話\ 表示教授之間的互動</i>
+        <pre class="text-section">
+（有一段科技文章朗讀+翻譯，答畢）
+
+教授C：你第一行倒數第二個字怎麼唸
+我：major
+教授C：第一行欸
+教授A：\他的有放大\
+我：（翻面）我的版本是這樣
+
+教授B：那個internet 後面的字
+我：mobile(mo-擺喔)
+教授C：m-o-b-i-l-e欸
+我：是，mo-擺喔
+教授C：（看左右教授）不是mo-必喔嗎？
+我：（微笑）我聽到的影片和對話都是 mo-擺喔 耶
+教授B：（小慌忙打開手機）
+教授C：\（疑惑）\
+我：（微笑）
+教授A：（看一下教授C）好，好沒關係，這個不重要，下一題
+        </pre>
+        <u class="murmur">沒想到同為臺師APCS淪落人竟然在海大開學遇到</u>
+        <!-- Content END -->
+    </body>
+</html>
