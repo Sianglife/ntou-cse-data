@@ -1,6 +1,6 @@
-/*	Date: 2024/11/20
-	Author: 
-	Description: 
+/*	Date: 2024/11/12
+	Author: 黃鈺翔
+	Description: 暗棋遊戲
 */
 
 #include <stdio.h>
@@ -15,16 +15,19 @@ int chessColor[HEIGHT][WIDTH];
 
 //function prototypes
 void shuffling(int intArray[], int N) {
-	int *used = calloc(N, sizeof(int));
+	// 產生 0 到 N-1 的隨機序列
+	int *used = calloc(N, sizeof(int)); // 產生長度N，記錄是否使用過的陣列，預設為0代表未使用，1代表已使用
 	for (int i = 0; i < N; i++) {
-		intArray[i] = rand() % N;
-		while (used[intArray[i]] == 1) {
+		intArray[i] = rand() % N; // 隨機產生0到N-1的數字
+		while (used[intArray[i]] == 1) { 
+			// 如果該數字已使用過，則重新產生
 			intArray[i] = rand() % N;
 		}
-		used[intArray[i]] = 1;
+		used[intArray[i]] = 1; // 標記該數字為已使用
 	}
 }
 int getRank(int number) {
+	// 輸入棋號，取得棋子的階級
 	if (number == 0 || number == 16) {
 		return 1;
 	} else if (number == 1 || number == 2 || number == 17 || number == 18) {
@@ -43,6 +46,7 @@ int getRank(int number) {
 	return -1;
 }
 int getColor(int number) {
+	// 輸入棋號，取得棋子的顏色
 	if (number >= 0 && number <=15) {
 		return 0;
 	} else if (number >= 16 && number <= 32) {
@@ -51,11 +55,13 @@ int getColor(int number) {
 	return -1;
 }
 void printBoard() {
-	printf("┌──┬──┬──┬──┬──┬──┬──┬──┐\n");
+	// 輸出棋盤
+	printf("┌──┬──┬──┬──┬──┬──┬──┬──┐\n"); // 頭部
 	for (int i = 0; i < HEIGHT; i++) {
 		for (int j = 0; j < WIDTH; j++) {
-			printf("|");
+			printf("|"); // 行頭
 			if (chessColor[i][j] == 0) {
+				// 黑棋
 				if (chessRank[i][j] == 1) {
 					printf("將");
 				} else if (chessRank[i][j] == 2) {
@@ -72,6 +78,7 @@ void printBoard() {
 					printf("卒");
 				}
 			} else if (chessColor[i][j] == 1) {
+				// 紅棋
 				if (chessRank[i][j] == 1) {
 					printf("帥");
 				} else if (chessRank[i][j] == 2) {
@@ -89,12 +96,12 @@ void printBoard() {
 				}
 			}
 		}
-		printf("|\n");
+		printf("|\n"); // 行尾
 		if (i != HEIGHT - 1) {
-			printf("├──┼──┼──┼──┼──┼──┼──┼──┤\n");
+			printf("├──┼──┼──┼──┼──┼──┼──┼──┤\n"); // 行間隔
 		}
 	}
-	printf("└──┴──┴──┴──┴──┴──┴──┴──┘\n");	
+	printf("└──┴──┴──┴──┴──┴──┴──┴──┘\n");	// 尾部
 }
 
 int main() {
