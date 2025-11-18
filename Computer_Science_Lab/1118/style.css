@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0.5rem 1rem;
+}
+
+#died-table {
+    justify-self: center;
+    padding: 2rem 2rem;
+}
+
+#died-table th, #died-table td {
+    border: 1px solid #000;
+    padding: 0.5rem 1rem;
+}
+
+#board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 1rem 2rem;
+    justify-self: center;
+}
+
+.died-area {
+    border: 2px solid #000;
+    width: 10rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.died-img {
+    max-width: 100%;
+    max-height: 10rem;
+}
+
+#banner {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 9rem 1rem;
+}
+
+#banner h2 {
+    padding: 2rem 0;
+}
+
+#links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(85, 85, 85);
+}
+
+.home {    
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.home-block {
+    padding: 0.5rem 0;
+}
+
+.lxgw-wenkai-tc-regular {
+  font-family: "LXGW WenKai TC", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
