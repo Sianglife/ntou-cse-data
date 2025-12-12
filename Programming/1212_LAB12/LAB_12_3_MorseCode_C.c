@@ -1,6 +1,6 @@
 /*Date: 2025/12/12
 Author: 黃鈺翔
-Description: 
+Description: Decoding Morse Code to Plaintext
 Using github copilot to write comments
 */
 #include<stdio.h>
