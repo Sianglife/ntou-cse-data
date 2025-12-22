@@ -1,5 +1,5 @@
 /*Date: 2025/12/22
-Author: ¶Àà±µ¾
+Author: é»ƒéˆºç¿”
 Description: Student Score Management System
 Using github copilot to write comments
 */
@@ -7,8 +7,6 @@ Using github copilot to write comments
 #include<string.h>
 #include<stdlib.h>
 #define DB_FILENAME "db.dat"
-
-// TODO: Test, comments
 
 struct student {
     int chineseScore;
@@ -18,172 +16,197 @@ struct student {
 typedef struct student student;
 
 
-FILE *fp;
-student tmpStudent;
-student currentStudent;
+FILE *fp; // file pointer
+student tmpStudent; // temporary student record
+student currentStudent; // current student record
 
 void addRecord(FILE *fName, student *newRecord) {
-    fName = fopen(DB_FILENAME, "a+b");
-    fwrite(newRecord, sizeof(student), 1, fName);
-    fclose(fName);
+    // Add new student record to the database
+    fName = fopen(DB_FILENAME, "a+b"); // open file in append binary mode
+    fwrite(newRecord, sizeof(student), 1, fName); // write new record to file
+    fclose(fName); // close file
 }
 
 int findRecord(FILE *fName, student *newRecord) {
-    int result = 0;
-    fName = fopen(DB_FILENAME, "rb");
+    // Find student record in the database
+    int result = 0; // 0: not found, 1: found
+    fName = fopen(DB_FILENAME, "rb"); // open file in read binary mode
     while(fread(&currentStudent, sizeof(student), 1, fName) == 1) {
+        // Read each record
         if(strcmp(newRecord->name, currentStudent.name) == 0) {
-            result = 1;
+            // compare names
+            result = 1; // found
             break;
         }
     }
-    fclose(fName);
-    return result;
+    fclose(fName); // close file
+    return result; // return result
 }
 
 void modifyRecord(FILE *fName, student *updatedRecord) {
-    fName = fopen(DB_FILENAME, "r+b");
+    // Modify existing student record in the database
+    fName = fopen(DB_FILENAME, "r+b"); // open file in read and write binary mode
     while(fread(&currentStudent, sizeof(student), 1, fName) == 1) {
+        // Read each record
         if(strcmp(updatedRecord->name, currentStudent.name) == 0) {
-            fseek(fName, -(long long)sizeof(student), SEEK_CUR);
-            fwrite(updatedRecord, sizeof(student), 1, fName);
+            // compare names
+            fseek(fName, -(long long)sizeof(student), SEEK_CUR); // move file pointer back to the start of the record
+            fwrite(updatedRecord, sizeof(student), 1, fName); // write updated record
             break;
         }
     }
-    fclose(fName);  
+    fclose(fName);   // close file
 }
 
-void deleteRecord(FILE *fName, student *deleteRecord) {    
-    fName = fopen(DB_FILENAME, "rb");
-    FILE *new_fp = fopen("temp.dat", "ab");
-    while(fread(&currentStudent, sizeof(student), 1, fName) == 1) {
+void deleteRecord(FILE *fName, student *deleteRecord) { 
+    // Delete student record from the database   
+    fName = fopen(DB_FILENAME, "rb"); // open file in read binary mode
+    FILE *new_fp = fopen("temp.dat", "wb"); // open temporary file in write binary mode
+    while(fread(&currentStudent, sizeof(student), 1, fName) == 1) { 
+        // Read each record
         if(strcmp(deleteRecord->name, currentStudent.name) != 0) {
-            fwrite(&currentStudent, sizeof(student), 1, fName);
+            // compare names
+            fwrite(&currentStudent, sizeof(student), 1, new_fp); // write record to temporary file if not the one to delete
         }
     }
-    fclose(fName);
-    fclose(new_fp);
-    remove(DB_FILENAME);
-    rename("temp.dat", DB_FILENAME);
+    fclose(fName); // close original file
+    fclose(new_fp); // close temporary file
+    remove(DB_FILENAME);  // delete original file
+    rename("temp.dat", DB_FILENAME); // rename temporary file to original file name
 }
 
 student *printRecord(FILE *fName, char name[]) {
-    fName = fopen(DB_FILENAME, "rb");
+    // Print student record and return pointer to it
+    fName = fopen(DB_FILENAME, "rb"); // open file in read binary mode
     while(fread(&currentStudent, sizeof(student), 1, fName) == 1) {
+        // Read each record
         if(strcmp(name, currentStudent.name) == 0) {
-            printf("¾Ç¥Í©m¦W: %s\n", currentStudent.name);
-            printf("°ê¤å¦¨ÁZ: %d\n", currentStudent.chineseScore);
-            printf("­^¤å¦¨ÁZ: %d\n", currentStudent.englishScore);
+            // compare names
+            printf("å­¸ç”Ÿå§“å: %s\n", currentStudent.name);
+            printf("åœ‹æ–‡æˆç¸¾: %d\n", currentStudent.chineseScore);
+            printf("è‹±æ–‡æˆç¸¾: %d\n", currentStudent.englishScore);
             break;
         }
     }
-    fclose(fName);
-    return &currentStudent;
+    fclose(fName); // close file
+    return &currentStudent; // return pointer to current student
 }
 
 void ADD() {
     // ADD
-    printf("\n·s¾Ç¥Í©m¦W: ");
+    printf("\næ–°å­¸ç”Ÿå§“å: ");
     scanf("%s", &tmpStudent.name);
-    printf("\n°ê¤å¦¨ÁZ: ");
+    printf("\nåœ‹æ–‡æˆç¸¾: ");
     scanf("%d", &tmpStudent.chineseScore);
-    printf("\n­^¤å¦¨ÁZ: ");
+    printf("\nè‹±æ–‡æˆç¸¾: ");
     scanf("%d", &tmpStudent.englishScore);
 
-    addRecord(fp, &tmpStudent);
+    addRecord(fp, &tmpStudent); // add new record to database
 
-    printf("¿é¤J¦¨¥\¡I\n");
+    printf("è¼¸å…¥æˆåŠŸï¼\n");
 }
 
 void MODIFY() {
     // MODIFY
-    printf("­n­×§ï­ş¤@¦ì¾Ç¥Íªº¸ê®Æ: ");
+    printf("è¦ä¿®æ”¹å“ªä¸€ä½å­¸ç”Ÿçš„è³‡æ–™: ");
     scanf("%s", &tmpStudent.name);
     if(findRecord(fp, &tmpStudent) == 0) {
-        // 
-        printf("¬dµL¦¹¤H¡I\n");
+        // Not found
+        printf("æŸ¥ç„¡æ­¤äººï¼\n");
         return;
     }
 
-    printf("\n¸Ó¥Í°ê¤å¦¨ÁZ: ");
+    printf("\nè©²ç”Ÿåœ‹æ–‡æˆç¸¾: ");
     scanf("%d", &tmpStudent.chineseScore);
-    printf("\n¸Ó¥Í­^¤å¦¨ÁZ: ");
+    printf("\nè©²ç”Ÿè‹±æ–‡æˆç¸¾: ");
     scanf("%d", &tmpStudent.englishScore);
 
-    modifyRecord(fp, &tmpStudent);
+    modifyRecord(fp, &tmpStudent); // modify record in database
 
-    printf("­×§ï¦¨¥\¡I\n");
+    printf("ä¿®æ”¹æˆåŠŸï¼\n");
 }
 
 void DELETE() {
     // DELETE
-    printf("­n§R°£­ş¤@¦ì¾Ç¥Íªº¸ê®Æ: ");
+    printf("è¦åˆªé™¤å“ªä¸€ä½å­¸ç”Ÿçš„è³‡æ–™: ");
     scanf("%s", &tmpStudent.name);
     if(findRecord(fp, &tmpStudent) == 0) {
-        // 
-        printf("¬dµL¦¹¤H¡I\n");
+        // Not found
+        printf("æŸ¥ç„¡æ­¤äººï¼\n");
         return;
     }
-    student *sp = printRecord(fp, tmpStudent.name);
-    printf("½T»{§R°£¡H(Y/N): ");
+    student *sp = printRecord(fp, tmpStudent.name); // print record to be deleted
+    printf("ç¢ºèªåˆªé™¤ï¼Ÿ(Y/N): ");
     char confirm;
-    scanf("%c", &confirm);
+    scanf(" %c", &confirm);
     if(confirm == 'y' || confirm == 'Y') {
-        deleteRecord(fp, sp);
-        printf("¦¨¥\§R°£¡I\n");
+        // Confirmed
+        deleteRecord(fp, sp); // delete record from database
+        printf("æˆåŠŸåˆªé™¤ï¼\n");
     }
 }
 
 int cmpChinese(const void *a, const void *b) {
+    // Compare function for qsort to sort by Chinese score
     student *stuA = (student *)a;
     student *stuB = (student *)b;
-    return stuA->chineseScore - stuB->chineseScore;
+    return stuB->chineseScore - stuA->chineseScore;
 }
 
 int cmpEnglish(const void *a, const void *b) {
+    // Compare function for qsort to sort by English score
     student *stuA = (student *)a;
     student *stuB = (student *)b;
-    return stuA->englishScore - stuB->englishScore;
+    return stuB->englishScore - stuA->englishScore;
 }
 
 void printChineseScore(FILE *fName) {
+    // Print Chinese scores in descending order
     fName = fopen(DB_FILENAME, "rb");
-    student students[100];
+    student students[100]; // array to hold student records
+    // read all records into array and count length
     int count = 0;
     while(fread(&students[count], sizeof(student), 1, fName) == 1) {
         count++;
     }
 
-    qsort(students, count, sizeof(student), cmpChinese);
+    qsort(students, count, sizeof(student), cmpChinese); // sort array by Chinese score
 
-    printf("°ê¤å¦¨ÁZ¥Ñ¤j¨ì¤p¡G\n");
+    printf("åœ‹æ–‡æˆç¸¾ç”±å¤§åˆ°å°ï¼š\n");
     for(int i = 0; i < count; i++) {
+        // print sorted records
         printf("%s %d\n", students[i].name, students[i].chineseScore);
     }
+    fclose(fName); // close file
 }
 
 void printEnglishScore(FILE *fName) {
+    // Print English scores in descending order
     fName = fopen(DB_FILENAME, "rb");
-    student students[100];
+    student students[100]; // array to hold student records
+    // read all records into array and count length
     int count = 0;
     while(fread(&students[count], sizeof(student), 1, fName) == 1) {
         count++;
     }
 
-    qsort(students, count, sizeof(student), cmpEnglish);
-
-    printf("­^¤å¦¨ÁZ¥Ñ¤j¨ì¤p¡G\n");
+    qsort(students, count, sizeof(student), cmpEnglish); // sort array by English score
+ 
+    printf("è‹±æ–‡æˆç¸¾ç”±å¤§åˆ°å°ï¼š\n");
     for(int i = 0; i < count; i++) {
+        // print sorted records
         printf("%s %d\n", students[i].name, students[i].englishScore);
     }
+    fclose(fName); // close file
 }
 
 
 int main() {
     int mode;
     while(1) {
-        printf("½Ğ¿ï¾Ü¥\¯à: ");
+        printf("è«‹é¸æ“‡åŠŸèƒ½: ");
         scanf("%d", &mode);
+        // Call Action Based on User Input
         if (mode == 1) {
             ADD();
         } else if (mode == 2) {
