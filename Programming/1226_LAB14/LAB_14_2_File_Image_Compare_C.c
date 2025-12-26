@@ -1,3 +1,8 @@
+/*Date: 2025/12/26
+Author: 黃鈺翔
+Description: Compare two binary martix files and count the number of matching elements.
+Using github copilot to write comments
+*/
 #include<stdio.h>
 
 int getMaximumMatch(char *fNameA, char *fNameB) {
@@ -8,24 +13,25 @@ int getMaximumMatch(char *fNameA, char *fNameB) {
         return -1;
     }
 
-    int col = 0, row = 0;
-    int collen = 0, rowlen = 0;
-    int mapA[100][100] = {0}, mapB[100][100] = {0};
-    char bufferA[200], bufferB[200];
+    int col = 0, row = 0; // current position in the matrix
+    int collen = 0, rowlen = 0; // declare for dimensions of the matrix
+    int mapA[100][100] = {0}, mapB[100][100] = {0}; // declare two 2D arrays to hold the binary matrices
+    char bufferA[200], bufferB[200]; // buffers to read lines from files
     // Read file A into mapA
     while (fgets(bufferA, sizeof(bufferA), fileA) != NULL) {
         // Process each file line by line
         col = 0;
         for (int i = 0; bufferA[i] != '\0'; i++) {
             if (bufferA[i] == '0' || bufferA[i] == '1') {
-                mapA[row][col] = bufferA[i] - '0';
+                // just handle '0' and '1' characters and convert them to integers
+                mapA[row][col] = bufferA[i] - '0'; // put into the 2D array
                 col++;
             }
         }        
         row++;
     }
 
-    // set dimensions
+    // set dimensions as the fileA dimensions
     rowlen = row;
     collen = col;
 
@@ -50,6 +56,7 @@ int getMaximumMatch(char *fNameA, char *fNameB) {
     for (int i = 0; i < rowlen; i++) {
         for (int j = 0; j < collen; j++) {
             if (mapA[i][j] == mapB[i][j]) {
+                // count matching elements
                 maxMatch++;
             }
         }
