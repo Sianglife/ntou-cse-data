@@ -21,68 +21,119 @@ int Number::getNumber() {
 shared_ptr<Number> head;  
 shared_ptr<Number> tail;
 
-void swap(shared_ptr<Number> a, shared_ptr<Number> b) {    
-    shared_ptr<Number> tmp, tmp_previous, tmp_next;
-    if (a->previous != NULL)
-        a->previous->next = b;
-    else
-        head = b; // If a is head, update head to b
-    if (b->next != NULL)
-        b->next->previous = a;
-    else
-        tail = a; // If b is tail, update tail to a
-    tmp_previous = a->previous; 
-    a->next = b->next;
-    a->previous = b;
-    b->next = a;
-    b->previous = tmp_previous;
+shared_ptr<Number> splitMid(shared_ptr<Number> start) {
+    shared_ptr<Number> slow = start;
+    shared_ptr<Number> fast = start;
 
+    while (fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    shared_ptr<Number> second = slow->next;
+    slow->next = nullptr;
+    if (second) {
+        second->previous = nullptr;
+    }
+    return second;
+}
+
+shared_ptr<Number> mergeSorted(shared_ptr<Number> left, shared_ptr<Number> right) {
+    if (!left) return right;
+    if (!right) return left;
+
+    shared_ptr<Number> newHead;
+    if (left->getNumber() <= right->getNumber()) {
+        newHead = left;
+        left = left->next;
+    } else {
+        newHead = right;
+        right = right->next;
+    }
+    newHead->previous = nullptr;
+
+    shared_ptr<Number> cur = newHead;
+    while (left && right) {
+        if (left->getNumber() <= right->getNumber()) {
+            cur->next = left;
+            left->previous = cur;
+            left = left->next;
+        } else {
+            cur->next = right;
+            right->previous = cur;
+            right = right->next;
+        }
+        cur = cur->next;
+    }
+
+    if (left) {
+        cur->next = left;
+        left->previous = cur;
+    } else if (right) {
+        cur->next = right;
+        right->previous = cur;
+    }
+
+    return newHead;
+}
+
+shared_ptr<Number> mergeSortDLL(shared_ptr<Number> start) {
+    if (!start || !start->next) {
+        return start;
+    }
+
+    shared_ptr<Number> second = splitMid(start);
+    shared_ptr<Number> left = mergeSortDLL(start);
+    shared_ptr<Number> right = mergeSortDLL(second);
+
+    return mergeSorted(left, right);
 }
 
 void printDLLNumber() {
-    shared_ptr<Number> current;
-    current = head;
-    while (current->next != NULL) {
+    if (!head) {
+        cout << endl;
+        return;
+    }
+
+    shared_ptr<Number> current = head;
+    while (current->next != nullptr) {
         cout << current->getNumber() << " ";
         current = current->next;
     }
-    cout << current->getNumber();
+    cout << current->getNumber() << endl;
 }  
 
 void sortDLL() {
-    shared_ptr<Number> inner_pos, outer_pos = head; // Items after outer_pos are sorted
-    while(outer_pos != tail) {
-        inner_pos = head; // innter_pos is current cmp front place
-        while(inner_pos != tail) {
-            if (inner_pos->getNumber() > inner_pos->next->getNumber()) {
-                // cout << "swap " << inner_pos->getNumber() << " and " << inner_pos->next->getNumber() << endl;
-                swap(inner_pos, inner_pos->next);
-                // printDLLNumber();
-            }
-            inner_pos = inner_pos -> next;
-        }
-        outer_pos = outer_pos -> next;
+    if (!head || !head->next) {
+        return;
     }
-    // cout << "sorted" << endl;
-    // printDLLNumber();    
+
+    head = mergeSortDLL(head);
+
+    shared_ptr<Number> cur = head;
+    while (cur->next) {
+        cur = cur->next;
+    }
+    tail = cur;
 }  
   
 
 void readInput(vector<int> & v) {  
-    string line, token;  
+    string line;  
   
     getline(cin, line);  
-    stringstream ss(line);  // To split the input by space
+    stringstream ss(line);
+    int num;
   
-    while (getline(ss, token, ' ')) {  
-        v.push_back(stoi(token));  
+    while (ss >> num) {
+        v.push_back(num);
     }  
 }  
 
 
 void makeDLL(vector<int> v) {
     shared_ptr<Number> current, previous, next; // temp pointer for iteration
-    previous = NULL; 
+    previous = nullptr; 
     head = make_shared<Number>(v[0]);
     current = head;
 
@@ -97,7 +148,7 @@ void makeDLL(vector<int> v) {
         current = next;
     }
     // The last node's property
-    current->next = NULL;
+    current->next = nullptr;
     current->previous = previous;
     tail = current;
 }  
