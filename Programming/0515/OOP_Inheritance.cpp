@@ -44,7 +44,7 @@ class Date {
             this->weekday = ((this->day_delta % 7) + this->first_weekday) % 7;
         }
 
-        void getDeltaDay() {
+        void genDeltaDay() {
             int delta = 0;
             for (int i = 1; i < this->month; i++) {
                 switch (i) {
@@ -82,7 +82,7 @@ class Date2026 : public Date {
         Date2026(int mm, int dd) : Date(mm, dd) {
             this->year = 2026;
             this->first_weekday = 4;
-            this->getDeltaDay();
+            this->genDeltaDay();
             this->getWeekday();
         }
 };
@@ -92,7 +92,7 @@ class Date2027 : public Date {
         Date2027(int mm, int dd) : Date(mm, dd) {
             this->year = 2027;
             this->first_weekday = 5;
-            this->getDeltaDay();
+            this->genDeltaDay();
             this->getWeekday();
         }
 };
